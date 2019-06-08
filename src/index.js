@@ -1,40 +1,37 @@
-"use strict";
+//  компонент 3
+import { employers, EmployersNames } from "./employers";
+import { sponsors, Sponsors } from "./sponsors";
 
-var _employers = require("./employers");
+const emp = new EmployersNames(employers),
+  startBusiness = new Sponsors(sponsors);
 
-var _sponsors = require("./sponsors");
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var emp = new _employers.EmployersNames(_employers.employers),
-    startBusiness = new _sponsors.Sponsors(_sponsors.sponsors);
-
-var MakeBusiness =
-/*#__PURE__*/
-function () {
-  function MakeBusiness(owner, director, sponsors, employers, money) {
-    _classCallCheck(this, MakeBusiness);
-
+class MakeBusiness {
+  constructor(owner, director = "Victor", sponsors, employers, money) {
     this.owner = owner;
-    this.director = director || "Victor";
+    this.director = director;
     this.sponsors = sponsors;
     this.employers = employers;
     this.money = money;
   }
 
-  _createClass(MakeBusiness, [{
-    key: "satrt",
-    value: function satrt() {
-      console.log("We have a business. Owner: ".concat(this.owner, ", director: ").concat(this.director, ". Our budget: ").concat(this.money, ". And our employers: ").concat(this.employers, "\nAnd we have a sponsors: \n").concat(this.sponsors, "\nNote. Be careful with ").concat(_sponsors.sponsors.eu[0], ". It's a huge risk."));
-    }
-  }]);
+  satrt() {
+    console.log(
+      `We have a business. Owner: ${this.owner}, director: ${
+        this.director
+      }. Our budget: ${this.money}. And our employers: ${this.employers}
+And we have a sponsors: 
+${this.sponsors}
+Note. Be careful with ${sponsors.eu[0]}. It's a huge risk.`
+    );
+  }
+}
 
-  return MakeBusiness;
-}();
+const makeBusiness = new MakeBusiness(
+  "Sam",
+  undefined,
+  startBusiness.sumSponsors(),
+  emp.getEmployersNames(),
+  startBusiness.calcCash()
+);
 
-var makeBusiness = new MakeBusiness("Sam", undefined, startBusiness.sumSponsors(), emp.employersNames(), startBusiness.calcCash());
 makeBusiness.satrt();
